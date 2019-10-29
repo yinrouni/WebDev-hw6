@@ -11,15 +11,20 @@
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-light bg-white">
         <div class="col-4">
-          <a class="navbar-brand" href="#">Lens</a>
+          <a class="navbar-brand" href="#">Timesheets</a>
         </div>
         <div class="col-4">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">All Photos</a>
+	      <%= if @current_user do %>
+	          <a class="nav-link" href="#">All Timesheets</a>
+		  <%= if @current_user.is_manager do %>
+		   is manager
+		   <% end %>
+	      <% end %>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Your Photos</a>
+              <a class="nav-link" href="#">Your Timesheets</a>
             </li>
           </ul>
         </div>
