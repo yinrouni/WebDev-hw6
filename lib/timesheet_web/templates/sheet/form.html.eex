@@ -1,0 +1,40 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+<div class="form-group">
+  <%= label f, :date %>
+  <%= date_select f, :date , class: "form-control"%>
+  <%= error_tag f, :date %>
+</div>
+<div class="row">
+  <div class="col-4">
+    Tasks
+  </div>
+  <div class="col-4">
+    Hours
+  </div>
+  <div class="col-4">
+    Note
+  </div>
+</div>
+<div class="row">
+<div class="col-4">
+  <%= select f, :task1, [nil|@jobs_list] %>
+  <%= error_tag f, :task1 %>
+</div>
+<div class="col-4">
+    <%= select f, :hour1, 0..8 %>
+    <%= error_tag f, :hours1 %>
+</div>
+<div class="col-4">
+   <%= text_input f, :note1, class: "form-control" %>
+   <%= error_tag f, :note1 %>
+</div>
+</div>
+  <div>
+    <%= submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>
