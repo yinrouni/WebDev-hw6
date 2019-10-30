@@ -7,8 +7,7 @@ defmodule Timesheet.Jobs.Job do
     field :hours, :integer
     field :job_code, :string
     field :name, :string
-    field :user_id, :id
-
+    belongs_to :user, Timesheet.Users.User
     timestamps()
   end
 

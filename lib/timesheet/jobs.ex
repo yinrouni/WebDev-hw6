@@ -35,8 +35,11 @@ defmodule Timesheet.Jobs do
       ** (Ecto.NoResultsError)
 
   """
-  def get_job!(id), do: Repo.get!(Job, id)
-
+  def get_job!(id) do
+      Repo.one! from p in Job,
+      where: p.id == ^id,
+      preload: [:user]
+  end
   @doc """
   Creates a job.
 
