@@ -15,7 +15,7 @@
         </div>
         <div class="col-4">
 	<%= if @current_user do %>
-          <%= if @current_user.is_manager do %>
+          <%= if !@current_user.is_manager do %>
             <%= link("NewTimesheet", to: Routes.sheet_path(@conn, :new)) %> 
           <% end %>
 	<% end %>

@@ -21,6 +21,7 @@ defmodule TimesheetWeb.SheetController do
   end
 
   def create(conn, %{"sheet" => sheet_params}) do
+    sheet_params = Map.put(sheet_params, "worker_id", conn.assigns[:current_user].id)
     case Sheets.create_sheet(sheet_params) do
       {:ok, sheet} ->
         conn
