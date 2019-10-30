@@ -22,6 +22,8 @@ defmodule TimesheetWeb.SheetController do
 
   def create(conn, %{"sheet" => sheet_params}) do
     sheet_params = Map.put(sheet_params, "worker_id", conn.assigns[:current_user].id)
+    query = from job in Timesheet.Jobs.Job, select: job.job_code
+    jobs_list = Repo.all(query)
     case Sheets.create_sheet(sheet_params) do
       {:ok, sheet} ->
         conn
@@ -29,7 +31,8 @@ defmodule TimesheetWeb.SheetController do
         |> redirect(to: Routes.sheet_path(conn, :show, sheet))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        IO.inspect(changeset)
+        render(conn, "new.html", changeset: changeset, jobs_list: jobs_list)
     end
   end
 

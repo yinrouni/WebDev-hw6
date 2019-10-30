@@ -11,6 +11,10 @@
     <strong>Status:</strong>
     <%= @sheet.status %>
   </li>
+  <li>
+    <strong>User:</strong>
+    <%= @sheet.user.name %>
+  </li>
 
 </ul>
 
