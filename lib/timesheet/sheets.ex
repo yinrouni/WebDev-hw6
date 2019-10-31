@@ -40,14 +40,14 @@ defmodule Timesheet.Sheets do
 	where: s.id == ^id, 
 
         preload: [:user, :tasks]
-  end 
-
-  def get_sheet_by_user(id) do
+  end
+    def get_sheet_by_user(id) do
     Repo.all from s in Sheet, 
 	where: s.worker_id == ^id, 
 
         preload: [:user, :tasks]
-  end 
+  end
+
 
 
   @doc """

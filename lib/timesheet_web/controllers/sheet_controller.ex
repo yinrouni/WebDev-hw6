@@ -7,11 +7,20 @@ defmodule TimesheetWeb.SheetController do
   alias Timesheet.Sheets.Sheet
   alias Timesheet.Jobs.Job
   alias Timesheet.Repo
+  alias Timesheet.Users
 
   def index(conn, _params) do
-    sheets = Sheets.get_sheet_by_user(conn.assigns[:current_user].id)
-
-    render(conn, "index.html", sheets: sheets)
+    if (!conn.assigns[:current_user].is_manager) do
+      sheets = Sheets.get_sheet_by_user(conn.assigns[:current_user].id)
+      render(conn, "index.html", sheets: sheets)
+    else
+      IO.inspect("is manager") 
+      workers = Users.get_users_by_manager_email(conn.assigns[:current_user].email)
+      IO.inspect(workers)
+     sheets = Enum.concat(Enum.map(workers, fn x->Sheets.get_sheet_by_user(x.id) end))
+      IO.inspect(sheets)
+      render(conn, "index.html", sheets: sheets)
+    end
   end
 
   def new(conn, _params) do
@@ -37,23 +46,10 @@ defmodule TimesheetWeb.SheetController do
         render(conn, "new.html", changeset: changeset, jobs_list: jobs_list)
     end
   end
-  def get_tasks_params(conn, sheet_params, task, hour, notes) do
-     tasks_params = %{}
-     if (sheet_params[task] != nil) do
-        
-        job_id = Repo.get_by(Timesheet.Jobs.Job, job_code: sheet_params[task]).id
-        tasks_params = tasks_params |> Map.put("hours", sheet_params[hour])
-			|> Map.put("job_id", job_id)
-			|> Map.put("notes", sheet_params[notes])
-       tasks_params
-    end
-
-  end
 
   def show(conn, %{"id" => id}) do
     sheet = Sheets.get_sheet!(id)
     sheet_id = sheet.id
-    query = from task in Timesheet.Tasks.Task, where: task.sheet_id == ^sheet_id 
     tasks = Timesheet.Tasks.get_tasks_by_sheet_id(sheet_id)
     IO.inspect(tasks)
     render(conn, "show.html", sheet: sheet, tasks: tasks)
@@ -61,8 +57,10 @@ defmodule TimesheetWeb.SheetController do
 
   def edit(conn, %{"id" => id}) do
     sheet = Sheets.get_sheet!(id)
+    query = from job in Timesheet.Jobs.Job, select: job.job_code
+    jobs_list = Repo.all(query)
     changeset = Sheets.change_sheet(sheet)
-    render(conn, "edit.html", sheet: sheet, changeset: changeset)
+    render(conn, "edit.html", sheet: sheet, changeset: changeset, jobs_list: jobs_list)
   end
 
   def update(conn, %{"id" => id, "sheet" => sheet_params}) do

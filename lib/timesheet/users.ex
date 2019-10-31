@@ -48,6 +48,11 @@ defmodule Timesheet.Users do
       _ -> nil
     end
   end
+def get_users_by_manager_email(manager_email) do
+    Repo.all from s in User, 
+	where: s.manager_email == ^manager_email 
+
+  end 
 
 
   @doc """

@@ -19,6 +19,12 @@
       <td class="col-6">
         <span><%= link "Show", to: Routes.sheet_path(@conn, :show, sheet) %></span>
       </td>
+     <%= if @current_user.is_manager do %>
+      <td class="col-6">
+
+        <span><%= link "Edit", to: Routes.sheet_path(@conn, :edit, sheet) %></span>
+      </td>
+     <% end %>
     </tr>
 <% end %>
 <% end %>
