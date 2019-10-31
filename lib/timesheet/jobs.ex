@@ -40,6 +40,10 @@ defmodule Timesheet.Jobs do
       where: p.id == ^id,
       preload: [:user]
   end
+  def get_job_by_job_code(job_code) do
+    Repo.get_by(Job, job_code: job_code)
+  end
+
   @doc """
   Creates a job.
 

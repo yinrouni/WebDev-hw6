@@ -57,6 +57,8 @@ defmodule Timesheet.Sheets do
     %Sheet{}
     |> Sheet.changeset(attrs)
     |> Repo.insert()
+    
+    
   end
 
   @doc """
@@ -103,6 +105,7 @@ defmodule Timesheet.Sheets do
 
   """
   def change_sheet(%Sheet{} = sheet) do
+    IO.inspect(sheet)
     Sheet.changeset(sheet, %{})
   end
 end

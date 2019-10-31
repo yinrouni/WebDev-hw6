@@ -14,7 +14,7 @@ defmodule TimesheetWeb.SheetController do
   end
 
   def new(conn, _params) do
-    changeset = Sheets.change_sheet(%Sheet{})
+    changeset = Sheets.change_sheet(%Sheet{tasks: List.duplicate(%Timesheet.Tasks.Task{}, 8)})
     query = from job in Timesheet.Jobs.Job, select: job.job_code
     jobs_list = Repo.all(query)
     render(conn, "new.html", changeset: changeset, jobs_list: jobs_list)
@@ -26,14 +26,27 @@ defmodule TimesheetWeb.SheetController do
     jobs_list = Repo.all(query)
     case Sheets.create_sheet(sheet_params) do
       {:ok, sheet} ->
+       IO.inspect(sheet_params)
         conn
         |> put_flash(:info, "Sheet created successfully.")
-        |> redirect(to: Routes.sheet_path(conn, :show, sheet))
+	 |> redirect(to: Routes.sheet_path(conn, :show, sheet))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         IO.inspect(changeset)
         render(conn, "new.html", changeset: changeset, jobs_list: jobs_list)
     end
+  end
+  def get_tasks_params(conn, sheet_params, task, hour, notes) do
+     tasks_params = %{}
+     if (sheet_params[task] != nil) do
+        
+        job_id = Repo.get_by(Timesheet.Jobs.Job, job_code: sheet_params[task]).id
+        tasks_params = tasks_params |> Map.put("hours", sheet_params[hour])
+			|> Map.put("job_id", job_id)
+			|> Map.put("notes", sheet_params[notes])
+       tasks_params
+    end
+
   end
 
   def show(conn, %{"id" => id}) do

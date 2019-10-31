@@ -8,6 +8,7 @@ defmodule Timesheet.Users.User do
     field :password_hash, :string
     field :is_manager, :boolean
 
+    has_many :sheets, Timesheet.Sheets.Sheet
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :manager_email, :string

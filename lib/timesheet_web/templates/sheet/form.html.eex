@@ -23,127 +23,25 @@ Name: <%=@current_user.name%>
     Note
   </div>
 </div>
-<div class="row">
-<div class="col-2">
-  <%= select f, :task1, [nil|@jobs_list] %>
-  <%= error_tag f, :task1 %>
-</div>
-<div class="col-md-auto">
-    <%= select f, :hour1, 0..8 %>
-    <%= error_tag f, :hours1 %>
-</div>
-<div class="col-8">
-   <%= text_input f, :note1, class: "form-control" %>
-   <%= error_tag f, :note1 %>
-</div>
-</div>
 
-<div class="row">
-<div class="col-2">
-  <%= select f, :task2, [nil|@jobs_list] %>
-  <%= error_tag f, :task2 %>
-</div>
-<div class="col-md-auto">
-    <%= select f, :hour2, 0..8 %>
-    <%= error_tag f, :hours2 %>
-</div>
-<div class="col-8">
-   <%= text_input f, :note2, class: "form-control" %>
-   <%= error_tag f, :note2 %>
-</div>
-</div>
-
-<div class="row">
-<div class="col-2">
-  <%= select f, :task3, [nil|@jobs_list] %>
-  <%= error_tag f, :task3 %>
-</div>
-<div class="col-md-auto">
-    <%= select f, :hour3, 0..8 %>
-    <%= error_tag f, :hours3 %>
-</div>
-<div class="col-8">
-   <%= text_input f, :note3, class: "form-control" %>
-   <%= error_tag f, :note3 %>
-</div>
-</div>
-
-<div class="row">
-<div class="col-2">
-  <%= select f, :task4, [nil|@jobs_list] %>
-  <%= error_tag f, :task4 %>
-</div>
-<div class="col-md-auto">
-    <%= select f, :hour4, 0..8 %>
-    <%= error_tag f, :hours4 %>
-</div>
-<div class="col-8">
-   <%= text_input f, :note4, class: "form-control" %>
-   <%= error_tag f, :note4 %>
-</div>
-</div>
-
-<div class="row">
-<div class="col-2">
-  <%= select f, :task5, [nil|@jobs_list] %>
-  <%= error_tag f, :task5 %>
-</div>
-<div class="col-md-auto">
-    <%= select f, :hour5, 0..8 %>
-    <%= error_tag f, :hours5 %>
-</div>
-<div class="col-8">
-   <%= text_input f, :note5, class: "form-control" %>
-   <%= error_tag f, :note5 %>
-</div>
-</div>
-
-<div class="row">
-<div class="col-2">
-  <%= select f, :task6, [nil|@jobs_list] %>
-  <%= error_tag f, :task6 %>
-</div>
-<div class="col-md-auto">
-    <%= select f, :hour6, 0..8 %>
-    <%= error_tag f, :hours6 %>
-</div>
-<div class="col-8">
-   <%= text_input f, :note6, class: "form-control" %>
-   <%= error_tag f, :note6 %>
-</div>
-</div>
+  <%= inputs_for f, :tasks, fn p -> %>
+   <div class="row">
+    <div class="col-2">
+      <%= select p, :task, [nil|@jobs_list] %>
+      <%= error_tag p, :hours %>
+    </div>
+    <div class="col-md-auto">
+      <%= select p, :hours, 0..8 %>
+      <%= error_tag p, :hours %>
+    </div>
+    <div class="col-8">
+      <%= text_input p, :notes, class: "form-control" %>
+      <%= error_tag p, :notes %>
+    </div>
+  </div>
 
 
-<div class="row">
-<div class="col-2">
-  <%= select f, :task7, [nil|@jobs_list] %>
-  <%= error_tag f, :task7 %>
-</div>
-<div class="col-md-auto">
-    <%= select f, :hour7, 0..8 %>
-    <%= error_tag f, :hours7 %>
-</div>
-<div class="col-8">
-   <%= text_input f, :note7, class: "form-control" %>
-   <%= error_tag f, :note7 %>
-</div>
-</div>
-
-<div class="row">
-<div class="col-2">
-  <%= select f, :task8, [nil|@jobs_list] %>
-  <%= error_tag f, :task8 %>
-</div>
-<div class="col-md-auto">
-    <%= select f, :hour8, 0..8 %>
-    <%= error_tag f, :hours8 %>
-</div>
-<div class="col-8">
-   <%= text_input f, :note8, class: "form-control" %>
-   <%= error_tag f, :note8 %>
-</div>
-</div>
-
+  <% end %>
   <div>
     <%= submit "Save", class: "btn btn-primary" %>
   </div>
