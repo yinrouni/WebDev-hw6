@@ -8,15 +8,13 @@ defmodule Timesheet.Tasks.Task do
     field :hours, :integer
     field :notes, :string
     belongs_to :job, Timesheet.Jobs.Job
-    belongs_to :sheet, Timsheet.Sheets.Sheet
+    belongs_to :sheet, Timesheet.Sheets.Sheet
     timestamps()
   end
 
   @doc false
   def changeset(task, attrs) do
-    IO.inspect(attrs)
     attrs = attrs_help(attrs)
-    IO.inspect(attrs)
     task
     |> cast(attrs, [:hours, :notes, :job_id])
     |> validate_required([:hours, :job_id])
@@ -32,7 +30,6 @@ defmodule Timesheet.Tasks.Task do
 def validate_repo_existence(%{valid?: false} = changeset), do: changeset
   def attrs_help(attrs) do
     if (attrs["task"] != "" && attrs["task"] != nil) do 
-      IO.inspect("if")
       attrs = Map.put(attrs, "job_id", Timesheet.Jobs.get_job_by_job_code(attrs["task"]).id)
       attrs
     else

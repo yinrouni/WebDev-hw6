@@ -9,7 +9,8 @@ defmodule TimesheetWeb.SheetController do
   alias Timesheet.Repo
 
   def index(conn, _params) do
-    sheets = Sheets.list_sheets()
+    sheets = Sheets.get_sheet_by_user(conn.assigns[:current_user].id)
+
     render(conn, "index.html", sheets: sheets)
   end
 
@@ -51,7 +52,11 @@ defmodule TimesheetWeb.SheetController do
 
   def show(conn, %{"id" => id}) do
     sheet = Sheets.get_sheet!(id)
-    render(conn, "show.html", sheet: sheet)
+    sheet_id = sheet.id
+    query = from task in Timesheet.Tasks.Task, where: task.sheet_id == ^sheet_id 
+    tasks = Timesheet.Tasks.get_tasks_by_sheet_id(sheet_id)
+    IO.inspect(tasks)
+    render(conn, "show.html", sheet: sheet, tasks: tasks)
   end
 
   def edit(conn, %{"id" => id}) do

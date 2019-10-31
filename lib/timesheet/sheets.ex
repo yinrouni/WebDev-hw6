@@ -38,8 +38,17 @@ defmodule Timesheet.Sheets do
   def get_sheet!(id) do
     Repo.one! from s in Sheet, 
 	where: s.id == ^id, 
-        preload: [:user]
+
+        preload: [:user, :tasks]
   end 
+
+  def get_sheet_by_user(id) do
+    Repo.all from s in Sheet, 
+	where: s.worker_id == ^id, 
+
+        preload: [:user, :tasks]
+  end 
+
 
   @doc """
   Creates a sheet.
@@ -105,7 +114,6 @@ defmodule Timesheet.Sheets do
 
   """
   def change_sheet(%Sheet{} = sheet) do
-    IO.inspect(sheet)
     Sheet.changeset(sheet, %{})
   end
 end
