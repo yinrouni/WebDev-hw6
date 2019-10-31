@@ -1,4 +1,4 @@
-<h1>Show Sheet</h1>
+<h4>Show Timesheet</h4>
 
 <ul>
 <div class="row">
@@ -18,31 +18,34 @@
 </div>
     </ul>
     <strong>Tasks:</strong>
-    <div class="row">
-      <div class="col-4">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="col-4">
         Job Code
-      </div>
-      <div class="col-4">
+      </th>
+      <th class="col-4">
         Hours
-      </div>
-      <div class="col-4">
+      </th>
+      <th class="col-4">
         Notes
-      </div>
+      </th>
+    </tr>
+  </thead>
 
-    </div>
     <%= for task <- @tasks do %>
-    <div class="row">
-      <div class="col-4">
+    <tr>
+      <td class="col-4">
         <%= task.job.job_code%>
-      </div>
-      <div class="col-4">
+      </td>
+      <td class="col-4">
         <%= task.hours%>
-      </div>
-      <div class="col-4">
+      </td>
+      <td class="col-4">
         <%= task.notes%>
-      </div>
+      </td>
 
-    </div>
+    </tr>
     <%end%>
 </table>
 

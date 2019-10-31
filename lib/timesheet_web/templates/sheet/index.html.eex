@@ -1,6 +1,6 @@
-<h1>Listing Sheets</h1>
+<h4>Manage Timesheets</h4>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th class="col-6">Date</th>
@@ -31,4 +31,6 @@
   </tbody>
 </table>
 
+<%= if !@current_user.is_manager do %>
 <span><%= link "New Sheet", to: Routes.sheet_path(@conn, :new) %></span>
+<% end %>

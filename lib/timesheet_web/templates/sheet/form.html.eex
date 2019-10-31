@@ -4,9 +4,9 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
-<h4>
+<h5>
 Name: <%=@current_user.name%>
-</h4>
+</h5>
 <div class="form-group">
   <%= label f, :date %>
   <%= date_select f, :date , class: "form-control"%>

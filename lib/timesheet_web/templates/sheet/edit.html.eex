@@ -1,4 +1,4 @@
-<h1>Edit Sheet</h1>
+<h4>Edit Timesheet Status</h4>
 
 <%= render "approval.html", Map.put(assigns, :action, Routes.sheet_path(@conn, :update, @sheet)) %>
 

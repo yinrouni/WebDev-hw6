@@ -1,4 +1,4 @@
-<h1>New Sheet</h1>
+<h4>Create a Timesheet</h4>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.sheet_path(@conn, :create)) %>
 
