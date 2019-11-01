@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :timesheet, Timesheet.Repo,
   username: "timesheet",
-  password: "Daichah7seij",
+  password: "zaeKahm5ra0m",
   database: "timesheet_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

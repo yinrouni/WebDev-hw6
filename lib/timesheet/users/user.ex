@@ -9,6 +9,7 @@ defmodule Timesheet.Users.User do
     field :is_manager, :boolean
 
     has_many :sheets, Timesheet.Sheets.Sheet
+    has_many :jobs, Timesheet.Jobs.Job
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :manager_email, :string
@@ -24,7 +25,7 @@ defmodule Timesheet.Users.User do
     |> validate_confirmation(:password)
     |> validate_length(:password, min: 12) # too short
     |> hash_password()
-    |> validate_required([:email, :name, :is_manager, :manager_email, :password_hash])
+    |> validate_required([:email, :name, :is_manager,:password_hash])
   end
 
   def hash_password(cset) do

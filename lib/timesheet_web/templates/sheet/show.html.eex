@@ -35,10 +35,10 @@
 
     <%= for task <- @tasks do %>
     <tr>
-      <td class="col-4">
+      <td class="col-2">
         <%= task.job.job_code%>
       </td>
-      <td class="col-4">
+      <td class="col-2">
         <%= task.hours%>
       </td>
       <td class="col-4">

@@ -1,0 +1,16 @@
+[Unit]
+Description=Timesheet Managing
+
+[Service]
+Type=simple
+User=timesheet
+Group=timesheet
+Restart=on-failure
+Environment=MIX_ENV=prod "PORT=5001"
+Environment=LANG=en_US.UTF-8
+
+WorkingDirectory=/home/timesheet/WebDev-hw6
+ExecStart=/bin/bash /home/timesheet/WebDev-hw6/start.sh
+
+[Install]
+WantedBy=multi-user.target
