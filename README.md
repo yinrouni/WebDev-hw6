@@ -11,9 +11,14 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 ## Design
+New users can register. If he is manager, leave the manager_email empty when registering. 
+All the managers and workers are in the same table users.
+NOTE: every user should has a unique email.
 
-
+A manager can have many jobs to supervise. 
 The jobs have to be preloaded into the database. Manager_id is FK in table jobs, so before preload the data of jobs, make sure the managers of them have already registered.
+
+A worker has many timesheet, and each timesheet may contain several tasks.
 
 
 ## Sample Data for Test
