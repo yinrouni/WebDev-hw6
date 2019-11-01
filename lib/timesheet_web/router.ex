@@ -21,7 +21,7 @@ defmodule TimesheetWeb.Router do
     resources "/sheets",SheetController,
        only: [:new, :create, :index, :show, :update, :edit] 
     resources "/users", UserController,
-       only: [:new, :create, :show]
+       only: [:new, :create, :show, :index]
     resources "/tasks", TaskController,
 	only: [:new, :create]
     resources "/sessions", SessionController, 
