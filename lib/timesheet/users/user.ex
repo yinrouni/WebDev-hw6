@@ -24,7 +24,7 @@ defmodule Timesheet.Users.User do
     |> validate_confirmation(:password)
     |> validate_length(:password, min: 12) # too short
     |> hash_password()
-    |> validate_required([:email, :name, :is_manager, :manager_email, :password_hash])
+    |> validate_required([:email, :name, :is_manager,:password_hash])
   end
 
   def hash_password(cset) do
