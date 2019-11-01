@@ -18,7 +18,9 @@ NOTE: every user should has a unique email.
 A manager can have many jobs to supervise. 
 The jobs have to be preloaded into the database. Manager_id is FK in table jobs, so before preload the data of jobs, make sure the managers of them have already registered.
 
-A worker has many timesheet, and each timesheet may contain several tasks.
+A worker has many timesheet, and each timesheet may contain several tasks. A worker can only create a timesheet, while a manager can only edit the status of it by set it as pending or approved.
+
+Once a manger logs in, all the timesheets submitted to him will display.
 
 
 ## Sample Data for Test
